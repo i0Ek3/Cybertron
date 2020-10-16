@@ -1,7 +1,13 @@
-package main
+package cybertron
 
 import (
 	"fmt"
+)
+
+const (
+	SEASON1 = iota + 1
+	SEASON2
+	SEASON3
 )
 
 type Autobot struct {
@@ -20,6 +26,7 @@ type Centrist struct {
 }
 
 type Decepticon struct {
+	season         int
 	Megatron       string
 	Starscream     string
 	Thundercracker string
@@ -31,27 +38,26 @@ type Decepticon struct {
 }
 
 type Transformer interface {
-	transform() string
+	transform(season ...int)
 }
 
-func (a *Autobot) transform() {
-	a.OptimusPrime = fmt.Sprintf("Autobot boss: Optimus Prime.")
+func (a *Autobot) transform(season ...int) {
+	a.OptimusPrime = fmt.Sprint("Peterbilt")
 }
 
-func (c *Centrist) transform() {
+func (c *Centrist) transform(season ...int) {
 }
 
-func (d *Decepticon) transform() {
-	d.Megatron = fmt.Sprintf("Decepticon boss: Megatron.")
-}
-
-func main() {
-	fmt.Println("Welcome to Cybertron!")
-	a := &Autobot{}
-	a.transform()
-	fmt.Println(a)
-
-	d := &Decepticon{}
-	d.transform()
-	fmt.Println(d)
+func (d *Decepticon) transform(season ...int) {
+	if len(season) > 0 {
+		d.season = season[0]
+	}
+	switch d.season {
+	case SEASON1:
+		d.Megatron = fmt.Sprintf("Warcraft")
+	case SEASON2:
+		d.Megatron = fmt.Sprintf("Panzer")
+	case SEASON3:
+		d.Megatron = fmt.Sprintf("OilTank")
+	}
 }

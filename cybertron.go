@@ -32,26 +32,44 @@ type Bumblebee struct {
 	Transformers
 }
 
+type Sideswipe struct {
+	Transformers
+}
+
+type Wheeljack struct {
+	Transformers
+}
+
+type Skyfire struct {
+	Transformers
+}
+
+type Elita struct {
+	Transformers
+}
+
 type Autobot struct {
 	OptimusPrime
 	UltraMagnus
 	Bumblebee
+	Sideswipe
+	Wheeljack
+	Skyfire
+	Elita
 	Season int
-	//Sideswipe    string
-	//Wheeljack    string
-	//Skyfire      string
-	//Moonracer    string
-	//Elita        string
+	isDD   bool
 }
 
 type DoubleDealer struct {
 	Transformers
 	factions string
+	trueName string
 }
 
 type Centrist struct {
 	DoubleDealer
 	Season int
+	isDD   bool
 }
 
 type Megatron struct {
@@ -66,16 +84,32 @@ type Thundercracker struct {
 	Transformers
 }
 
+type Shockwave struct {
+	Transformers
+}
+
+type Soundwave struct {
+	Transformers
+}
+
+type Swindle struct {
+	Transformers
+}
+
+type Menasor struct {
+	Transformers
+}
+
 type Decepticon struct {
 	Megatron
 	Starscream
 	Thundercracker
+	Shockwave
+	Soundwave
+	Swindle
+	Menasor
 	Season int
-	//Soundwave      string
-	//Menasor        string
-	//Laserbeak      string
-	//Swindle        string
-	//Shockwave      string
+	isDD   bool
 }
 
 type Transformer interface {
@@ -88,6 +122,7 @@ func (a *Autobot) init(season ...int) {
 	if len(season) > 0 {
 		a.Season = season[0]
 	}
+
 	switch a.Season {
 	case SEASON1:
 		a.OptimusPrime.Value = 80.0
@@ -97,6 +132,8 @@ func (a *Autobot) init(season ...int) {
 		a.OptimusPrime.Value = 90.0
 	default:
 	}
+
+	a.isDD = false
 }
 
 func (a *Autobot) transform(season ...int) {
@@ -107,6 +144,7 @@ func (c *Centrist) init(season ...int) {
 	if len(season) > 0 {
 		c.Season = season[0]
 	}
+
 	switch c.Season {
 	case SEASON1:
 	case SEASON2:
@@ -114,14 +152,17 @@ func (c *Centrist) init(season ...int) {
 	default:
 	}
 
+	c.isDD = true
 }
 
 func (c *Centrist) transform(season ...int) {
-	// TODO: ensure the deformed of duble-dealer
-	if c.DoubleDealer.factions == A {
-		c.DoubleDealer.Deformed = ""
+	if c.isDD {
+		c.DoubleDealer.Deformed = "Pontiac"
+		if c.DoubleDealer.factions == A {
+			c.DoubleDealer.trueName = "CounterPunch"
+		}
+		c.DoubleDealer.trueName = "Punch"
 	}
-	c.DoubleDealer.Deformed = ""
 }
 
 func (d *Decepticon) init(season ...int) {
@@ -132,6 +173,7 @@ func (d *Decepticon) init(season ...int) {
 	default:
 	}
 
+	d.isDD = false
 }
 
 func (d *Decepticon) transform(season ...int) {

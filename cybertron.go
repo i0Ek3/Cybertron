@@ -4,50 +4,62 @@ import (
 	"fmt"
 )
 
+// defines transformers type
 const (
 	A = "Autobots"
 	D = "Decepticons"
 )
 
+// defines transformers' season
 const (
 	SEASON1 = iota + 1
 	SEASON2
 	SEASON3
 )
 
+// Transformers defines the transformers'
+// power and what they can transformered
 type Transformers struct {
 	Value    float64
 	Deformed string
 }
 
+// qtz
 type OptimusPrime struct {
 	Transformers
 }
 
+// ttx
 type UltraMagnus struct {
 	Transformers
 }
 
+// dhf
 type Bumblebee struct {
 	Transformers
 }
 
+// hp
 type Sideswipe struct {
 	Transformers
 }
 
+// qjd
 type Wheeljack struct {
 	Transformers
 }
 
+// th
 type Skyfire struct {
 	Transformers
 }
 
+// alt
 type Elita struct {
 	Transformers
 }
 
+// Autobot defines all autobots
 type Autobot struct {
 	OptimusPrime
 	UltraMagnus
@@ -60,46 +72,56 @@ type Autobot struct {
 	isDD   bool
 }
 
+// smr
 type DoubleDealer struct {
 	Transformers
 	factions string
 	trueName string
 }
 
+// Centrist defines double-dealer
 type Centrist struct {
 	DoubleDealer
 	Season int
 	isDD   bool
 }
 
+// wzt
 type Megatron struct {
 	Transformers
 }
 
+// hzz
 type Starscream struct {
 	Transformers
 }
 
+// ld
 type Thundercracker struct {
 	Transformers
 }
 
+// zdb
 type Shockwave struct {
 	Transformers
 }
 
+// sb
 type Soundwave struct {
 	Transformers
 }
 
+// zp
 type Swindle struct {
 	Transformers
 }
 
+// jgn
 type Menasor struct {
 	Transformers
 }
 
+// Decepticon defines all decepticons
 type Decepticon struct {
 	Megatron
 	Starscream
@@ -112,6 +134,7 @@ type Decepticon struct {
 	isDD   bool
 }
 
+// Transformer defines transformers' interface
 type Transformer interface {
 	transform(season ...int)
 	init(season int)
